@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LearnSphere - E-Learning Management System</title>
+    <meta name="description" content="A modern, responsive E-Learning Management System featuring student dashboards, course catalog, interactive lessons, quizzes, admin CRUD management, and relational DBMS architecture." />
+    <meta property="og:title" content="LearnSphere - E-Learning Management System" />
+    <meta property="og:description" content="Master computing, relational database management systems, programming, and cybersecurity with interactive courses." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- Top Bar Navigation Contract: 1 Row, 3 Zones -->
+    <header class="site-header">
+      <div class="container header-container">
+        <!-- Zone 1: Single element brand wordmark -->
+        <a href="index.html" class="brand" aria-label="LearnSphere Home">
+          <div class="brand-icon">L</div>
+          <span class="brand-text">Learn<span>Sphere</span></span>
+        </a>
+
+        <!-- Zone 2: 4-5 concise single-line nav links -->
+        <nav class="nav-menu" aria-label="Main Navigation">
+          <a href="courses.html" class="nav-link">Courses</a>
+          <a href="dashboard.html" class="nav-link">Student Portal</a>
+          <a href="admin.html" class="nav-link">Admin Console</a>
+          <a href="database-design.html" class="nav-link">Database Schema</a>
+        </nav>
+
+        <!-- Zone 3: Theme switch and Primary CTA -->
+        <div class="header-actions">
+          <button class="theme-toggle-btn" aria-label="Toggle Color Theme"></button>
+          <div id="nav-auth-container">
+            <!-- Dynamic session injected by app.js -->
+            <a href="login.html" class="btn btn-sm btn-secondary">Sign In</a>
+            <a href="register.html" class="btn btn-sm btn-primary">Enroll Free</a>
+          </div>
+          <button class="mobile-nav-toggle" aria-label="Open mobile menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div class="mobile-drawer">
+        <a href="courses.html" class="mobile-nav-link">Courses Catalog</a>
+        <a href="dashboard.html" class="mobile-nav-link">Student Dashboard</a>
+        <a href="admin.html" class="mobile-nav-link">Admin Console</a>
+        <a href="database-design.html" class="mobile-nav-link">Database Schema (DBMS)</a>
+        <a href="login.html" class="mobile-nav-link">Sign In</a>
+        <a href="register.html" class="mobile-nav-link">Register Student</a>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <span class="hero-kicker">Next-Generation Higher Education</span>
+            <h1 class="hero-title">Learn <span>Without Limits</span>, Build Real Systems</h1>
+            <p class="hero-desc">
+              Accelerate your engineering journey with structured curricula, hands-on relational database models, live progress tracking, and rigorous competency assessments.
+            </p>
+            <div class="hero-actions">
+              <a href="courses.html" class="btn btn-lg btn-primary">Explore Courses</a>
+              <a href="register.html" class="btn btn-lg btn-secondary">Get Started Free</a>
+            </div>
+            <div class="hero-meta">
+              <span>Verified Academic Credentialing</span>
+              <span aria-hidden="true">·</span>
+              <span>Self-Paced Modular Tracks</span>
+              <span aria-hidden="true">·</span>
+              <span>100% Free Demo Project</span>
+            </div>
+          </div>
+          <div class="hero-image-wrap">
+            <img 
+              src="/src/assets/images/hero_elearning_1792335663352.jpg" 
+              alt="University students collaborating on academic coursework with modern digital learning tools" 
+              class="hero-img"
+              referrerpolicy="no-referrer"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Quantitative Statistics Strip -->
+      <section class="stats-strip">
+        <div class="container stats-grid">
+          <div class="stat-item">
+            <span class="stat-value tabular-nums">8+</span>
+            <span class="stat-label">Core STEM &amp; Computing Courses</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value tabular-nums">12,450+</span>
+            <span class="stat-label">Active Enrolled University Students</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value tabular-nums">180+</span>
+            <span class="stat-label">Accredited Academic Instructors</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value tabular-nums">94.8%</span>
+            <span class="stat-label">Course Assessment Completion Rate</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Courses Section -->
+      <section class="section">
+        <div class="container">
+          <div class="section-header row">
+            <div>
+              <span class="section-kicker">Curriculum Spotlight</span>
+              <h2 class="section-title">Featured Academic Courses</h2>
+              <p class="section-desc">
+                From relational database design to cybersecurity and artificial intelligence, master the disciplines that power modern software infrastructure.
+              </p>
+            </div>
+            <a href="courses.html" class="btn btn-secondary">View All Courses →</a>
+          </div>
+
+          <div class="courses-grid" id="featured-courses-grid">
+            <!-- Rendered dynamically by script below -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Benefits Section -->
+      <section class="section section-alt">
+        <div class="container">
+          <div class="section-header" style="text-align: center; align-items: center;">
+            <span class="section-kicker">Academic Excellence</span>
+            <h2 class="section-title">Why Students Choose LearnSphere</h2>
+            <p class="section-desc">
+              Engineered with relational DBMS rigor to ensure seamless student tracking, verifiable credentials, and deep domain mastery.
+            </p>
+          </div>
+
+          <div class="benefits-grid">
+            <div class="benefit-card">
+              <div class="benefit-icon">🗄️</div>
+              <h3 class="benefit-title">Relational Database Architecture</h3>
+              <p class="benefit-desc">
+                Built upon normalized SQL entity models (3NF) linking students, courses, enrollments, lessons, and quiz attempts with referential integrity.
+              </p>
+            </div>
+
+            <div class="benefit-card">
+              <div class="benefit-icon">📊</div>
+              <h3 class="benefit-title">Live Dynamic Progress Tracking</h3>
+              <p class="benefit-desc">
+                Track every completed lesson and module in real time with dynamic percentage indicators, deadlines, and recent lesson history.
+              </p>
+            </div>
+
+            <div class="benefit-card">
+              <div class="benefit-icon">🏆</div>
+              <h3 class="benefit-title">Verified Competency Certification</h3>
+              <p class="benefit-desc">
+                Complete assessments with automated score calculations and receive shareable, verifiable certificates signed by academic department heads.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials Section -->
+      <section class="section">
+        <div class="container">
+          <div class="section-header" style="text-align: center; align-items: center;">
+            <span class="section-kicker">Student Feedback</span>
+            <h2 class="section-title">What Our Learners Say</h2>
+            <p class="section-desc">
+              Real testimonials from computer science and engineering undergraduates who accelerated their technical careers with LearnSphere.
+            </p>
+          </div>
+
+          <div class="testimonials-grid">
+            <div class="testimonial-card">
+              <p class="testimonial-quote">
+                “The Database Management Systems course made 3NF normalization and E-R relational modeling crystal clear. The interactive quizzes reinforced every core SQL concept before my university exams.”
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">MC</div>
+                <div class="author-info">
+                  <h4>Marcus Chen</h4>
+                  <p>3rd Year B.Tech Computer Science, Stanford</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <p class="testimonial-quote">
+                “Having the student dashboard track my lesson completions and upcoming project deadlines in one unified portal kept me consistently 2 weeks ahead of our semester syllabus.”
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">AR</div>
+                <div class="author-info">
+                  <h4>Ananya Roy</h4>
+                  <p>Undergraduate Software Engineering, MIT</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <p class="testimonial-quote">
+                “The Admin CRUD console and database schema visualizer demonstrated exactly how real-world relational backends operate. Outstanding educational design.”
+              </p>
+              <div class="testimonial-author">
+                <div class="author-avatar">DL</div>
+                <div class="author-info">
+                  <h4>David Lawrence</h4>
+                  <p>Database Systems Teaching Assistant, Berkeley</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a href="index.html" class="brand">
+              <div class="brand-icon">L</div>
+              <span class="brand-text">Learn<span>Sphere</span></span>
+            </a>
+            <p>
+              A modern, responsive E-Learning Management System developed for collegiate Database Management Systems (DBMS) coursework demonstration.
+            </p>
+          </div>
+
+          <div class="footer-col">
+            <h4>Curriculum</h4>
+            <ul class="footer-links">
+              <li><a href="courses.html" class="footer-link">All Courses</a></li>
+              <li><a href="courses.html" class="footer-link">Database Systems</a></li>
+              <li><a href="courses.html" class="footer-link">Artificial Intelligence</a></li>
+              <li><a href="courses.html" class="footer-link">Cybersecurity</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Portals</h4>
+            <ul class="footer-links">
+              <li><a href="dashboard.html" class="footer-link">Student Dashboard</a></li>
+              <li><a href="admin.html" class="footer-link">Admin Console</a></li>
+              <li><a href="quiz.html" class="footer-link">Assessment Quizzes</a></li>
+              <li><a href="profile.html" class="footer-link">Student Profile</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>DBMS Project</h4>
+            <ul class="footer-links">
+              <li><a href="database-design.html" class="footer-link">ER Diagram &amp; Schema</a></li>
+              <li><a href="database-design.html" class="footer-link">Relational Tables</a></li>
+              <li><a href="login.html" class="footer-link">Demo Login</a></li>
+              <li><a href="register.html" class="footer-link">Student Register</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div>&copy; 2026 LearnSphere LMS Project. Built for Academic Demonstration.</div>
+          <div>Frontend prototype powered by HTML5, CSS3, JavaScript &amp; LocalStorage RDBMS simulation.</div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+    <script>
+      const initHomeFeatured = () => {
+        const grid = document.getElementById('featured-courses-grid');
+        if (!grid || !window.DB) return;
+
+        const db = window.DB.get();
+        // Featured selection: DBMS, AI, Cybersecurity, HTML/CSS
+        const featuredIds = ['crs_5', 'crs_7', 'crs_8', 'crs_1'];
+        const featuredCourses = (db.courses || []).filter(c => featuredIds.includes(c.id));
+
+        grid.innerHTML = featuredCourses.map(course => {
+          const thumbHtml = course.image
+            ? `<img src="${course.image}" alt="${course.title}" class="course-card-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+               <div class="course-thumb-fallback" style="display:none;">
+                 <div style="font-size:2rem; margin-bottom:0.25rem;">📚</div>
+                 <div style="font-weight:700;">${course.title}</div>
+               </div>`
+            : `<div class="course-thumb-fallback">
+                 <div style="font-size:2rem; margin-bottom:0.25rem;">📚</div>
+                 <div style="font-weight:700;">${course.title}</div>
+               </div>`;
+
+          return `
+            <article class="course-card">
+              <div class="course-card-thumb">
+                ${thumbHtml}
+              </div>
+              <div class="course-card-body">
+                <div class="course-meta-inline">
+                  <span>${course.category}</span>
+                  <span aria-hidden="true">·</span>
+                  <span>${course.level}</span>
+                  <span aria-hidden="true">·</span>
+                  <span class="tabular-nums">${course.duration}</span>
+                </div>
+                <h3 class="course-card-title">${course.title}</h3>
+                <p class="course-card-desc">${course.description}</p>
+                <div class="course-instructor">
+                  <span>Instructor: <strong>${course.instructor}</strong></span>
+                </div>
+              </div>
+              <div class="course-card-footer">
+                <div>
+                  <span class="course-price ${course.isFree ? 'free' : ''}">${course.price}</span>
+                  <div style="font-size:0.75rem; color:var(--color-text-muted);">★ ${course.rating.toFixed(1)}</div>
+                </div>
+                <div style="display:flex; gap:0.5rem;">
+                  <a href="course-details.html?id=${course.id}" class="btn btn-sm btn-secondary">Details</a>
+                  <a href="learn.html?id=${course.id}" class="btn btn-sm btn-primary">Enroll Free</a>
+                </div>
+              </div>
+            </article>
+          `;
+        }).join('');
+      };
+
+      if (window.onReady) {
+        window.onReady(initHomeFeatured);
+      } else {
+        document.addEventListener('DOMContentLoaded', initHomeFeatured);
+      }
+    </script>
+  </body>
+</html>

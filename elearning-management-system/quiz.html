@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course Assessment Quiz - LearnSphere LMS</title>
+    <meta name="description" content="Validate your academic understanding with interactive multiple-choice quizzes, instant scoring, and detailed explanations." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- Top Bar Navigation Contract -->
+    <header class="site-header">
+      <div class="container header-container">
+        <a href="index.html" class="brand">
+          <div class="brand-icon">L</div>
+          <span class="brand-text">Learn<span>Sphere</span></span>
+        </a>
+
+        <nav class="nav-menu">
+          <a href="courses.html" class="nav-link">Courses</a>
+          <a href="dashboard.html" class="nav-link">Student Portal</a>
+          <a href="admin.html" class="nav-link">Admin Console</a>
+          <a href="database-design.html" class="nav-link">Database Schema</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="theme-toggle-btn" aria-label="Toggle Color Theme"></button>
+          <div id="nav-auth-container"></div>
+          <button class="mobile-nav-toggle" aria-label="Open mobile menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-drawer">
+        <a href="courses.html" class="mobile-nav-link">Courses Catalog</a>
+        <a href="dashboard.html" class="mobile-nav-link">Student Dashboard</a>
+        <a href="database-design.html" class="mobile-nav-link">Database Schema</a>
+      </div>
+    </header>
+
+    <main class="section">
+      <div class="container quiz-container">
+        <!-- Assessment Card -->
+        <div class="quiz-card" id="quiz-card-container">
+          <div class="quiz-header">
+            <div>
+              <span class="section-kicker">Knowledge Evaluation</span>
+              <h1 id="quiz-main-title" style="font-size: 1.5rem; font-weight: 700; color: var(--color-text-main);">
+                Database Management Systems Certification Quiz
+              </h1>
+            </div>
+            <span id="quiz-step-indicator" class="quiz-step tabular-nums">Question 1 of 5</span>
+          </div>
+
+          <!-- Question Runner Area -->
+          <div id="quiz-interactive-area">
+            <!-- Rendered by js/quiz.js -->
+          </div>
+        </div>
+
+        <!-- Student Quiz History Table (Relational quiz_attempts Entity) -->
+        <div class="panel" style="margin-top: 2.5rem;">
+          <div class="panel-header">
+            <h3 style="font-size: 1.15rem; font-weight: 700;">My Prior Assessment Attempts</h3>
+            <span style="font-size: 0.75rem; color: var(--color-text-muted);">Stored in <code>quiz_attempts</code> table</span>
+          </div>
+          <div id="quiz-history-container">
+            <!-- Populated dynamically by js/quiz.js -->
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container footer-bottom">
+        <div>&copy; 2026 LearnSphere LMS Project. College DBMS Demonstration.</div>
+        <div>Scores &ge; 80% automatically issue a verified certificate to your Student Profile.</div>
+      </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/quiz.js"></script>
+  </body>
+</html>

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course Catalog - LearnSphere LMS</title>
+    <meta name="description" content="Browse our comprehensive course catalog spanning Database Management Systems, AI, Cybersecurity, and Software Engineering." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- Top Bar Navigation Contract -->
+    <header class="site-header">
+      <div class="container header-container">
+        <a href="index.html" class="brand">
+          <div class="brand-icon">L</div>
+          <span class="brand-text">Learn<span>Sphere</span></span>
+        </a>
+
+        <nav class="nav-menu">
+          <a href="courses.html" class="nav-link active">Courses</a>
+          <a href="dashboard.html" class="nav-link">Student Portal</a>
+          <a href="admin.html" class="nav-link">Admin Console</a>
+          <a href="database-design.html" class="nav-link">Database Schema</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="theme-toggle-btn" aria-label="Toggle Color Theme"></button>
+          <div id="nav-auth-container">
+            <!-- Dynamic session injected by app.js -->
+          </div>
+          <button class="mobile-nav-toggle" aria-label="Open mobile menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-drawer">
+        <a href="courses.html" class="mobile-nav-link active">Courses Catalog</a>
+        <a href="dashboard.html" class="mobile-nav-link">Student Dashboard</a>
+        <a href="admin.html" class="mobile-nav-link">Admin Console</a>
+        <a href="database-design.html" class="mobile-nav-link">Database Schema</a>
+      </div>
+    </header>
+
+    <main class="section">
+      <div class="container">
+        <!-- Page Header -->
+        <div class="section-header">
+          <span class="section-kicker">Academic Catalog</span>
+          <h1 class="section-title">Explore Academic Engineering Courses</h1>
+          <p class="section-desc">
+            Equip yourself with practical, enterprise-grade engineering skills. Enroll instantly into self-paced modules and start earning academic credentials.
+          </p>
+        </div>
+
+        <!-- Filter & Search Controls -->
+        <div style="background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 1.25rem;">
+          <div style="display: grid; grid-template-columns: 1fr 220px; gap: 1rem;">
+            <!-- Search bar -->
+            <div style="position: relative;">
+              <input 
+                type="text" 
+                id="course-search-input" 
+                class="form-control" 
+                placeholder="Search by course title, instructor, or subject keywords (e.g. DBMS, Python, AI)..." 
+              />
+            </div>
+
+            <!-- Difficulty Level Dropdown -->
+            <div>
+              <select id="course-level-select" class="form-control">
+                <option value="all">All Difficulty Levels</option>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Interactive Category Segmented Tabs (Anti-slop clean buttons) -->
+          <div style="display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.25rem;">
+            <button class="btn btn-sm btn-secondary filter-tab-btn active" data-category="all">All Disciplines</button>
+            <button class="btn btn-sm btn-secondary filter-tab-btn" data-category="database">Database &amp; SQL</button>
+            <button class="btn btn-sm btn-secondary filter-tab-btn" data-category="web-development">Web Development</button>
+            <button class="btn btn-sm btn-secondary filter-tab-btn" data-category="programming">Programming</button>
+            <button class="btn btn-sm btn-secondary filter-tab-btn" data-category="computer-science">Computer Science</button>
+            <button class="btn btn-sm btn-secondary filter-tab-btn" data-category="data-&-ai">AI &amp; Data</button>
+            <button class="btn btn-sm btn-secondary filter-tab-btn" data-category="security">Cybersecurity</button>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8125rem; color: var(--color-text-muted); border-top: 1px solid var(--color-border); padding-top: 0.75rem;">
+            <span id="results-count">Showing 8 courses</span>
+            <span>Tip: Click "Enroll Now" to link the course to your student profile via localStorage RDBMS.</span>
+          </div>
+        </div>
+
+        <!-- Dynamic Course Grid -->
+        <div class="courses-grid" id="courses-grid">
+          <!-- Populated dynamically by js/courses.js -->
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container footer-bottom">
+        <div>&copy; 2026 LearnSphere LMS Project. College DBMS Demonstration.</div>
+        <div>All course enrollments persist in local browser relational storage.</div>
+      </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/courses.js"></script>
+  </body>
+</html>

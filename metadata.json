@@ -1,0 +1,6 @@
+{
+  "name": "LearnSphere - E-Learning Management System",
+  "description": "A modern, responsive E-Learning Management System featuring student dashboards, course catalog, interactive lessons, quizzes, admin CRUD management, and relational DBMS architecture.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

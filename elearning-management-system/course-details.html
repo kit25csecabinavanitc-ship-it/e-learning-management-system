@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course Details - LearnSphere LMS</title>
+    <meta name="description" content="View comprehensive course syllabus, learning objectives, and instructor information on LearnSphere." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- Top Bar Navigation Contract -->
+    <header class="site-header">
+      <div class="container header-container">
+        <a href="index.html" class="brand">
+          <div class="brand-icon">L</div>
+          <span class="brand-text">Learn<span>Sphere</span></span>
+        </a>
+
+        <nav class="nav-menu">
+          <a href="courses.html" class="nav-link">Courses</a>
+          <a href="dashboard.html" class="nav-link">Student Portal</a>
+          <a href="admin.html" class="nav-link">Admin Console</a>
+          <a href="database-design.html" class="nav-link">Database Schema</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="theme-toggle-btn" aria-label="Toggle Color Theme"></button>
+          <div id="nav-auth-container">
+            <!-- Dynamic session injected by app.js -->
+          </div>
+          <button class="mobile-nav-toggle" aria-label="Open mobile menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-drawer">
+        <a href="courses.html" class="mobile-nav-link">Courses Catalog</a>
+        <a href="dashboard.html" class="mobile-nav-link">Student Dashboard</a>
+        <a href="admin.html" class="mobile-nav-link">Admin Console</a>
+        <a href="database-design.html" class="mobile-nav-link">Database Schema</a>
+      </div>
+    </header>
+
+    <main>
+      <!-- Course Hero Banner -->
+      <section class="hero" style="padding: 3.5rem 0;">
+        <div class="container" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3rem; align-items: center;">
+          <div>
+            <div class="course-meta-inline" style="margin-bottom: 1rem;">
+              <span id="detail-category">Database</span>
+              <span aria-hidden="true">·</span>
+              <span id="detail-level">Intermediate</span>
+              <span aria-hidden="true">·</span>
+              <span id="detail-duration" class="tabular-nums">22 Hours</span>
+            </div>
+            <h1 class="hero-title" id="detail-title" style="font-size: 2.5rem; margin-bottom: 1rem;">Database Management Systems</h1>
+            <p class="hero-desc" id="detail-desc" style="font-size: 1.05rem; margin-bottom: 1.5rem;">
+              Master relational algebra, 3NF normalization, SQL queries, transaction management, indexing, and scalable database schemas.
+            </p>
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+              <span style="font-size: 0.9375rem; color: var(--color-text-muted);">
+                Instructor: <strong id="detail-instructor" style="color: var(--color-text-main);">Dr. Evelyn Vance</strong>
+              </span>
+              <span aria-hidden="true">·</span>
+              <span style="font-size: 0.9375rem; color: var(--color-warning);">
+                ★ <strong id="detail-rating">5.0</strong> (<span id="detail-reviews">680</span> student ratings)
+              </span>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <button id="detail-enroll-btn" class="btn btn-lg btn-primary">Enroll Now</button>
+              <a href="quiz.html" id="detail-quiz-link" class="btn btn-lg btn-secondary">Certification Quiz</a>
+            </div>
+          </div>
+
+          <div class="hero-image-wrap" style="aspect-ratio: 4 / 3;">
+            <img 
+              id="detail-img" 
+              src="/src/assets/images/course_dbms_1792335663249.jpg" 
+              alt="Course cover" 
+              class="hero-img" 
+              onerror="this.parentElement.innerHTML='<div class=\\'course-thumb-fallback\\'><h3>Course Overview</h3></div>'"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Course Details Content -->
+      <section class="section">
+        <div class="container" style="display: grid; grid-template-columns: 2fr 1fr; gap: 3rem;">
+          <div>
+            <div class="panel" style="margin-bottom: 2rem;">
+              <h3 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 1rem;">What You Will Learn</h3>
+              <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem;">
+                <li style="display: flex; gap: 0.75rem; font-size: 0.9375rem;">
+                  <span style="color: var(--color-success); font-weight: bold;">✓</span>
+                  <span>Formulate and execute advanced relational queries in standard ANSI SQL.</span>
+                </li>
+                <li style="display: flex; gap: 0.75rem; font-size: 0.9375rem;">
+                  <span style="color: var(--color-success); font-weight: bold;">✓</span>
+                  <span>Design comprehensive Entity-Relationship (ER) models resolving 1:1, 1:N, and M:N relationships.</span>
+                </li>
+                <li style="display: flex; gap: 0.75rem; font-size: 0.9375rem;">
+                  <span style="color: var(--color-success); font-weight: bold;">✓</span>
+                  <span>Eliminate data redundancies and anomalies through 1NF, 2NF, 3NF, and BCNF normalization.</span>
+                </li>
+                <li style="display: flex; gap: 0.75rem; font-size: 0.9375rem;">
+                  <span style="color: var(--color-success); font-weight: bold;">✓</span>
+                  <span>Implement B-Tree indexing, query cost analysis, and ACID transaction isolation guarantees.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="panel">
+              <h3 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 1.25rem;">Curriculum &amp; Lesson Modules</h3>
+              <div id="detail-syllabus-modules">
+                <!-- Rendered by script -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Sidebar Meta -->
+          <div>
+            <div class="panel">
+              <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">Course Specifications</h4>
+              <div style="display: flex; flex-direction: column; gap: 0.875rem; font-size: 0.875rem;">
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--color-border); padding-bottom: 0.5rem;">
+                  <span style="color: var(--color-text-muted);">Enrollment Status</span>
+                  <strong id="detail-status" style="color: var(--color-accent);">Open</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--color-border); padding-bottom: 0.5rem;">
+                  <span style="color: var(--color-text-muted);">Tuition / Cost</span>
+                  <strong id="detail-price" style="color: var(--color-success);">Free</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--color-border); padding-bottom: 0.5rem;">
+                  <span style="color: var(--color-text-muted);">Total Curriculum Duration</span>
+                  <strong id="detail-meta-duration" class="tabular-nums">22 Hours</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--color-border); padding-bottom: 0.5rem;">
+                  <span style="color: var(--color-text-muted);">Assessment Method</span>
+                  <strong>Online Quiz (MCQ)</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding-bottom: 0.5rem;">
+                  <span style="color: var(--color-text-muted);">Prerequisites</span>
+                  <strong>Basic High School Math</strong>
+                </div>
+              </div>
+
+              <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border);">
+                <a href="learn.html" id="detail-portal-btn" class="btn btn-primary btn-block">Enter Learning Portal</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container footer-bottom">
+        <div>&copy; 2026 LearnSphere LMS Project. College DBMS Demonstration.</div>
+      </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+    <script>
+      const initDetails = () => {
+        const params = new URLSearchParams(window.location.search);
+        const courseId = params.get('id') || 'crs_5';
+        const db = window.DB.get();
+        const course = db.courses.find(c => c.id === courseId) || db.courses[4];
+
+        document.getElementById('detail-title').textContent = course.title;
+        document.getElementById('detail-desc').textContent = course.description;
+        document.getElementById('detail-category').textContent = course.category;
+        document.getElementById('detail-level').textContent = course.level;
+        document.getElementById('detail-duration').textContent = course.duration;
+        document.getElementById('detail-meta-duration').textContent = course.duration;
+        document.getElementById('detail-instructor').textContent = course.instructor;
+        document.getElementById('detail-rating').textContent = course.rating.toFixed(1);
+        document.getElementById('detail-reviews').textContent = course.reviewsCount;
+        document.getElementById('detail-price').textContent = course.price;
+        
+        if (course.image) {
+          const imgEl = document.getElementById('detail-img');
+          imgEl.src = course.image;
+          imgEl.onerror = () => {
+            imgEl.parentElement.innerHTML = `<div class="course-thumb-fallback"><h3>${course.title}</h3><p>${course.category}</p></div>`;
+          };
+        }
+
+        document.getElementById('detail-portal-btn').href = `learn.html?id=${course.id}`;
+        document.getElementById('detail-quiz-link').href = `quiz.html?course=${course.id}`;
+
+        // Check if enrolled
+        let session = window.DB.getSession();
+        const enrollBtn = document.getElementById('detail-enroll-btn');
+        const isEnrolled = session && db.enrollments.some(e => e.student_id === session.id && e.course_id === course.id);
+
+        if (isEnrolled) {
+          enrollBtn.textContent = "Already Enrolled (Open Portal)";
+          enrollBtn.className = "btn btn-lg btn-accent";
+          enrollBtn.onclick = () => window.location.href = `learn.html?id=${course.id}`;
+        } else {
+          enrollBtn.onclick = () => {
+            if (!session) {
+              const proceed = confirm("You are not currently signed in. Sign in as Demo Student (Alex Johnson) to enroll now?");
+              if (proceed) {
+                const demoStudent = db.students[0];
+                session = {
+                  id: demoStudent.id,
+                  name: demoStudent.name,
+                  email: demoStudent.email,
+                  avatar: demoStudent.avatar,
+                  bio: demoStudent.bio,
+                  role: 'Student',
+                  isAdmin: false
+                };
+                window.DB.setSession(session);
+              } else {
+                window.location.href = 'login.html';
+                return;
+              }
+            }
+
+            if (!db.enrollments) db.enrollments = [];
+            db.enrollments.push({
+              enrollment_id: `enr_${Date.now()}`,
+              student_id: session.id,
+              course_id: course.id,
+              enrolled_at: new Date().toISOString().split('T')[0],
+              status: "in-progress",
+              progress_percent: 0,
+              completed_lessons: []
+            });
+            window.DB.save(db);
+            window.Toast.show(`Successfully enrolled in ${course.title}!`, 'success');
+            setTimeout(() => window.location.href = `learn.html?id=${course.id}`, 600);
+          };
+        }
+
+        // Render modules
+        const modulesContainer = document.getElementById('detail-syllabus-modules');
+        const courseLessons = (db.lessons || []).filter(l => l.course_id === course.id);
+        const list = courseLessons.length > 0 ? courseLessons : [
+          { title: "Introduction & Theoretical Fundamentals", duration: "25 mins", module: "Module 1: Foundations" },
+          { title: "Core Architecture & Structural Implementation", duration: "40 mins", module: "Module 1: Foundations" },
+          { title: "Hands-on Practical Exercises & Case Studies", duration: "45 mins", module: "Module 2: Applied Practice" }
+        ];
+
+        modulesContainer.innerHTML = list.map((l, i) => `
+          <div style="padding: 0.875rem 1rem; border: 1px solid var(--color-border); border-radius: var(--radius-sm); margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; background-color: var(--color-surface-hover);">
+            <div>
+              <span style="font-size: 0.75rem; color: var(--color-accent); font-weight: 600;">Lesson ${i+1}</span>
+              <h5 style="font-size: 0.9375rem; font-weight: 600;">${l.title}</h5>
+            </div>
+            <span class="tabular-nums" style="font-size: 0.8125rem; color: var(--color-text-muted);">${l.duration}</span>
+          </div>
+        `).join('');
+      };
+
+      if (window.onReady) {
+        window.onReady(initDetails);
+      } else {
+        document.addEventListener('DOMContentLoaded', initDetails);
+      }
+    </script>
+  </body>
+</html>

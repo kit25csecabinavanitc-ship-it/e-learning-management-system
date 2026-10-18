@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Console - LearnSphere LMS</title>
+    <meta name="description" content="Administrative management dashboard for courses, student directories, and enrollment records." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body id="admin-dashboard-page">
+    <!-- Top Bar Navigation Contract -->
+    <header class="site-header">
+      <div class="container header-container">
+        <a href="index.html" class="brand">
+          <div class="brand-icon">L</div>
+          <span class="brand-text">Learn<span>Sphere</span></span>
+        </a>
+
+        <nav class="nav-menu">
+          <a href="courses.html" class="nav-link">Courses</a>
+          <a href="dashboard.html" class="nav-link">Student Portal</a>
+          <a href="admin.html" class="nav-link active">Admin Console</a>
+          <a href="database-design.html" class="nav-link">Database Schema</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="theme-toggle-btn" aria-label="Toggle Color Theme"></button>
+          <div id="nav-auth-container"></div>
+          <button class="mobile-nav-toggle" aria-label="Open mobile menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-drawer">
+        <a href="courses.html" class="mobile-nav-link">Courses Catalog</a>
+        <a href="dashboard.html" class="mobile-nav-link">Student Dashboard</a>
+        <a href="admin.html" class="mobile-nav-link active">Admin Console</a>
+        <a href="database-design.html" class="mobile-nav-link">Database Schema</a>
+      </div>
+    </header>
+
+    <main class="section" style="padding-top: 2.5rem;">
+      <div class="container">
+        <!-- Security & Architecture Banner -->
+        <div style="background-color: var(--color-surface); border: 1px solid var(--color-border); border-left: 4px solid var(--color-accent); border-radius: var(--radius-sm); padding: 1.25rem 1.5rem; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <h4 style="font-size: 0.9375rem; font-weight: 700; color: var(--color-text-main);">
+              🛡️ Administrative CRUD Operations Portal (College DBMS Demonstration)
+            </h4>
+            <p style="font-size: 0.8125rem; color: var(--color-text-muted); margin-top: 0.25rem;">
+              Demonstrating SQL <code>INSERT</code>, <code>UPDATE</code>, and <code>DELETE</code> entity management via client-side state. In production, administrative routes require role-based access control (RBAC), bcrypt hashes, and MySQL stored procedures.
+            </p>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button id="reset-demo-db-btn" class="btn btn-sm btn-secondary" title="Restore sample test data">
+              🔄 Reset Demo Database
+            </button>
+            <a href="database-design.html" class="btn btn-sm btn-primary">
+              View ER Diagram
+            </a>
+          </div>
+        </div>
+
+        <!-- System KPI Strip -->
+        <div class="kpi-grid" style="margin-bottom: 2.5rem;">
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span>Total Students</span>
+              <span>👥</span>
+            </div>
+            <div class="kpi-number tabular-nums" id="stat-total-students">2</div>
+            <div style="font-size: 0.75rem; color: var(--color-text-muted);">Registered accounts in <code>students</code></div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span>Total Courses</span>
+              <span>📚</span>
+            </div>
+            <div class="kpi-number tabular-nums" id="stat-total-courses">8</div>
+            <div style="font-size: 0.75rem; color: var(--color-text-muted);">Active entities in <code>courses</code></div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span>Total Enrollments</span>
+              <span>📝</span>
+            </div>
+            <div class="kpi-number tabular-nums" id="stat-total-enrollments">3</div>
+            <div style="font-size: 0.75rem; color: var(--color-text-muted);">Junction rows in <code>enrollments</code></div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <span>Certificates Awarded</span>
+              <span>🏆</span>
+            </div>
+            <div class="kpi-number tabular-nums" id="stat-total-certificates">1</div>
+            <div style="font-size: 0.75rem; color: var(--color-text-muted);">Issued in <code>certificates</code></div>
+          </div>
+        </div>
+
+        <!-- Management Navigation Tabs -->
+        <div style="display: flex; gap: 0.75rem; border-bottom: 1px solid var(--color-border); margin-bottom: 1.5rem; padding-bottom: 0.5rem;">
+          <button class="btn btn-sm btn-secondary admin-nav-tab active" data-target="admin-pane-courses">
+            Course Management (CRUD)
+          </button>
+          <button class="btn btn-sm btn-secondary admin-nav-tab" data-target="admin-pane-students">
+            Student Directory
+          </button>
+          <button class="btn btn-sm btn-secondary admin-nav-tab" data-target="admin-pane-enrollments">
+            Enrollments &amp; Progress
+          </button>
+        </div>
+
+        <!-- Pane 1: Course Management (Full CRUD) -->
+        <section id="admin-pane-courses" class="admin-section-pane">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+            <input 
+              type="text" 
+              id="admin-course-search" 
+              class="form-control" 
+              placeholder="Search courses by title, instructor, or category..." 
+              style="max-width: 360px;" 
+            />
+            <button id="add-course-btn" class="btn btn-primary">
+              + Add New Course (INSERT)
+            </button>
+          </div>
+
+          <div class="admin-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Course ID</th>
+                  <th>Title &amp; Category</th>
+                  <th>Instructor</th>
+                  <th>Level</th>
+                  <th>Price</th>
+                  <th>CRUD Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-courses-tbody">
+                <!-- Populated dynamically by js/admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Pane 2: Student Directory -->
+        <section id="admin-pane-students" class="admin-section-pane" style="display: none;">
+          <div class="panel-header" style="margin-bottom: 1rem;">
+            <h3 style="font-size: 1.15rem; font-weight: 700;">Registered Students Directory</h3>
+            <span style="font-size: 0.75rem; color: var(--color-text-muted);">Source Table: <code>students</code></span>
+          </div>
+
+          <div class="admin-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Student ID</th>
+                  <th>Full Name</th>
+                  <th>Email</th>
+                  <th>Registered Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="admin-students-tbody">
+                <!-- Populated dynamically by js/admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Pane 3: Enrollments & Progress -->
+        <section id="admin-pane-enrollments" class="admin-section-pane" style="display: none;">
+          <div class="panel-header" style="margin-bottom: 1rem;">
+            <h3 style="font-size: 1.15rem; font-weight: 700;">Student Course Enrollments Overview</h3>
+            <span style="font-size: 0.75rem; color: var(--color-text-muted);">Source Table: <code>enrollments</code> (M:N Associative Junction)</span>
+          </div>
+
+          <div class="admin-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Enrollment ID</th>
+                  <th>Student Name</th>
+                  <th>Course Title</th>
+                  <th>Progress</th>
+                  <th>Enrolled Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="admin-enrollments-tbody">
+                <!-- Populated dynamically by js/admin.js -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Course Create / Edit Modal Dialog -->
+    <div class="modal-overlay" id="course-modal">
+      <div class="modal-box" style="max-width: 600px;">
+        <div class="modal-header">
+          <h3 id="course-modal-title" style="font-size: 1.15rem; font-weight: 700;">Create New Course</h3>
+          <button id="close-course-modal-btn" class="btn btn-sm btn-secondary" style="border: none; font-size: 1.2rem; cursor: pointer;">&times;</button>
+        </div>
+        <form id="course-crud-form">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="course-title-input" class="form-label">Course Title</label>
+              <input type="text" id="course-title-input" class="form-control" placeholder="e.g. Distributed Database Architecture" required />
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label for="course-instructor-input" class="form-label">Lead Instructor</label>
+                <input type="text" id="course-instructor-input" class="form-control" placeholder="e.g. Dr. Jane Smith" required />
+              </div>
+              <div class="form-group">
+                <label for="course-category-input" class="form-label">Academic Category</label>
+                <input type="text" id="course-category-input" class="form-control" placeholder="e.g. Database, AI, Security" required />
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label for="course-level-input" class="form-label">Level</label>
+                <select id="course-level-input" class="form-control">
+                  <option value="Beginner">Beginner</option>
+                  <option value="Intermediate">Intermediate</option>
+                  <option value="Advanced">Advanced</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="course-duration-input" class="form-label">Duration</label>
+                <input type="text" id="course-duration-input" class="form-control" placeholder="e.g. 18 Hours" required />
+              </div>
+              <div class="form-group">
+                <label for="course-price-input" class="form-label">Tuition Price</label>
+                <input type="text" id="course-price-input" class="form-control" placeholder="Free or ₹499" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="course-desc-input" class="form-label">Course Syllabus Overview</label>
+              <textarea id="course-desc-input" class="form-control" rows="3" placeholder="Describe the course curriculum, learning objectives, and projects..." required></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="document.getElementById('course-modal').classList.remove('active')">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Course (Commit)</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container footer-bottom">
+        <div>&copy; 2026 LearnSphere LMS Project. College DBMS Demonstration.</div>
+        <div>Simulated Database State stored via HTML5 Web Storage API.</div>
+      </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/admin.js"></script>
+  </body>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In - LearnSphere LMS</title>
+    <meta name="description" content="Sign in to your LearnSphere student or administrative portal account." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- Top Bar Navigation Contract -->
+    <header class="site-header">
+      <div class="container header-container">
+        <a href="index.html" class="brand">
+          <div class="brand-icon">L</div>
+          <span class="brand-text">Learn<span>Sphere</span></span>
+        </a>
+
+        <nav class="nav-menu">
+          <a href="courses.html" class="nav-link">Courses</a>
+          <a href="dashboard.html" class="nav-link">Student Portal</a>
+          <a href="admin.html" class="nav-link">Admin Console</a>
+          <a href="database-design.html" class="nav-link">Database Schema</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="theme-toggle-btn" aria-label="Toggle Color Theme"></button>
+          <div id="nav-auth-container">
+            <a href="register.html" class="btn btn-sm btn-primary">Enroll Free</a>
+          </div>
+          <button class="mobile-nav-toggle" aria-label="Open mobile menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-drawer">
+        <a href="courses.html" class="mobile-nav-link">Courses Catalog</a>
+        <a href="dashboard.html" class="mobile-nav-link">Student Dashboard</a>
+        <a href="admin.html" class="mobile-nav-link">Admin Console</a>
+        <a href="database-design.html" class="mobile-nav-link">Database Schema</a>
+        <a href="register.html" class="mobile-nav-link">Register Student</a>
+      </div>
+    </header>
+
+    <main class="auth-page">
+      <div class="auth-card">
+        <div class="auth-header">
+          <h1 class="auth-title">Welcome Back</h1>
+          <p class="auth-subtitle">Sign in to access your courses, progress, and assessments</p>
+        </div>
+
+        <form id="login-form">
+          <div class="form-group">
+            <label for="login-email" class="form-label">Username or Email Address</label>
+            <input 
+              type="text" 
+              id="login-email" 
+              class="form-control" 
+              placeholder="e.g., student or admin (or email)" 
+              required 
+              autocomplete="username"
+            />
+          </div>
+
+          <div class="form-group" style="margin-top: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <label for="login-password" class="form-label">Password</label>
+              <a href="#" style="font-size: 0.8125rem; color: var(--color-accent);" onclick="alert('Use the dummy credentials student123 or admin123 below.'); return false;">Forgot?</a>
+            </div>
+            <input 
+              type="password" 
+              id="login-password" 
+              class="form-control" 
+              placeholder="e.g., student123 or admin123" 
+              required 
+              autocomplete="current-password"
+            />
+          </div>
+
+          <div id="login-error" class="form-feedback" style="margin-top: 0.5rem;"></div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top: 1rem;">
+            Sign In to Account
+          </button>
+        </form>
+
+        <!-- Dummy Login Credentials Panel for Faculty & Student Review -->
+        <div class="demo-credentials-box">
+          <h4 style="display: flex; align-items: center; gap: 0.375rem;">
+            🔑 Dummy Login Credentials
+          </h4>
+          <p style="color: var(--color-text-muted); line-height: 1.4; font-size: 0.8125rem;">
+            You can type these credentials directly into the form or click the 1-click login buttons:
+          </p>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.25rem;">
+            <!-- Dummy Student Box -->
+            <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 0.75rem; display: flex; flex-direction: column; gap: 0.25rem;">
+              <div style="font-weight: 700; color: var(--color-accent); font-size: 0.8125rem;">
+                👨‍🎓 Dummy Student
+              </div>
+              <div style="font-size: 0.75rem; color: var(--color-text-main); font-family: var(--font-mono);">
+                User: <strong>student</strong><br>
+                Pass: <strong>student123</strong>
+              </div>
+              <button id="demo-student-btn" type="button" class="btn btn-sm btn-secondary" style="margin-top: 0.375rem; font-size: 0.75rem; padding: 0.25rem 0.5rem;">
+                Auto-Fill Student
+              </button>
+            </div>
+
+            <!-- Dummy Admin Box -->
+            <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 0.75rem; display: flex; flex-direction: column; gap: 0.25rem;">
+              <div style="font-weight: 700; color: var(--color-primary); font-size: 0.8125rem;">
+                🛡️ Dummy Admin
+              </div>
+              <div style="font-size: 0.75rem; color: var(--color-text-main); font-family: var(--font-mono);">
+                User: <strong>admin</strong><br>
+                Pass: <strong>admin123</strong>
+              </div>
+              <button id="demo-admin-btn" type="button" class="btn btn-sm btn-secondary" style="margin-top: 0.375rem; font-size: 0.75rem; padding: 0.25rem 0.5rem;">
+                Auto-Fill Admin
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center; font-size: 0.875rem; color: var(--color-text-muted);">
+          Don't have a student account? <a href="register.html" style="color: var(--color-accent); font-weight: 600;">Create one now</a>
+        </div>
+
+        <div class="security-notice">
+          <strong>Academic Note:</strong> Client-side localStorage authentication is utilized solely for this frontend DBMS project demonstration. In production, authentication must be implemented on the backend (e.g., Python Flask + bcrypt password hashes + JWT) connected to a secure MySQL database.
+        </div>
+      </div>
+    </main>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/auth.js"></script>
+  </body>
+</html>

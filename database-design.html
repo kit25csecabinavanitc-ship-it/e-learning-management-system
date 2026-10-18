@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Database Architecture &amp; ER Design - LearnSphere LMS</title>
+    <meta name="description" content="Relational DBMS architecture, Entity-Relationship (ER) model, schemas, foreign keys, and 3NF normalization." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- Top Bar Navigation Contract -->
+    <header class="site-header">
+      <div class="container header-container">
+        <a href="index.html" class="brand">
+          <div class="brand-icon">L</div>
+          <span class="brand-text">Learn<span>Sphere</span></span>
+        </a>
+
+        <nav class="nav-menu">
+          <a href="courses.html" class="nav-link">Courses</a>
+          <a href="dashboard.html" class="nav-link">Student Portal</a>
+          <a href="admin.html" class="nav-link">Admin Console</a>
+          <a href="database-design.html" class="nav-link active">Database Schema</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="theme-toggle-btn" aria-label="Toggle Color Theme"></button>
+          <div id="nav-auth-container"></div>
+          <button class="mobile-nav-toggle" aria-label="Open mobile menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-drawer">
+        <a href="courses.html" class="mobile-nav-link">Courses Catalog</a>
+        <a href="dashboard.html" class="mobile-nav-link">Student Dashboard</a>
+        <a href="admin.html" class="mobile-nav-link">Admin Console</a>
+        <a href="database-design.html" class="mobile-nav-link active">Database Schema</a>
+      </div>
+    </header>
+
+    <main class="section">
+      <div class="container">
+        <!-- Page Header -->
+        <div class="section-header">
+          <span class="section-kicker">Relational Database Management Systems Project</span>
+          <h1 class="section-title">Database Schema &amp; Entity-Relationship Architecture</h1>
+          <p class="section-desc">
+            Engineered in compliance with Third Normal Form (3NF) relational design standards. This page provides an interactive view of all 10 entities, relational cardinalities, primary/foreign key mappings, and sample SQL definitions.
+          </p>
+        </div>
+
+        <!-- Cardinalities & Logical Overview Strip -->
+        <div class="panel" style="margin-bottom: 2.5rem; background: radial-gradient(circle at 10% 20%, var(--color-accent-light) 0%, var(--color-surface) 60%);">
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;">Core Relational Business Rules &amp; Cardinalities</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; font-size: 0.875rem;">
+            <div style="background-color: var(--color-surface); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--color-border);">
+              <strong style="color: var(--color-accent);">1. Students ↔ Courses (M:N)</strong>
+              <p style="color: var(--color-text-muted); margin-top: 0.25rem;">
+                One student can enroll in multiple courses, and each course enrolls multiple students. Resolved via associative junction table <code>enrollments</code>.
+              </p>
+            </div>
+
+            <div style="background-color: var(--color-surface); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--color-border);">
+              <strong style="color: var(--color-accent);">2. Courses ↔ Lessons (1:N)</strong>
+              <p style="color: var(--color-text-muted); margin-top: 0.25rem;">
+                Each course entity is composed of multiple sequential lessons. <code>lessons.course_id</code> establishes the foreign key relationship.
+              </p>
+            </div>
+
+            <div style="background-color: var(--color-surface); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--color-border);">
+              <strong style="color: var(--color-accent);">3. Students ↔ Lessons (Progress)</strong>
+              <p style="color: var(--color-text-muted); margin-top: 0.25rem;">
+                Connected via <code>lesson_progress</code> to record individual lesson completion flags and student notes.
+              </p>
+            </div>
+
+            <div style="background-color: var(--color-surface); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--color-border);">
+              <strong style="color: var(--color-accent);">4. Quizzes ↔ Quiz Attempts (1:N)</strong>
+              <p style="color: var(--color-text-muted); margin-top: 0.25rem;">
+                One student can attempt an assessment multiple times. Each attempt records scores, pass status, and completion timestamp.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Entity-Relationship (ER) Visual Diagrams Grid -->
+        <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">10 Relational Entities &amp; Table Columns</h2>
+        <p style="font-size: 0.9375rem; color: var(--color-text-muted); margin-bottom: 1.5rem;">
+          Yellow key denotes <span class="db-key-pk">PK (Primary Key)</span>, blue key denotes <span class="db-key-fk">FK (Foreign Key)</span>.
+        </p>
+
+        <div class="er-diagram-container">
+          <!-- Entity 1: Students -->
+          <div class="db-entity-card">
+            <div class="db-entity-header">
+              <span>TABLE: students</span>
+              <span>ENTITY</span>
+            </div>
+            <div class="db-attribute-row"><span class="db-key-pk">🔑 student_id</span><span>VARCHAR(36)</span><span>PK</span></div>
+            <div class="db-attribute-row"><span>full_name</span><span>VARCHAR(100)</span><span>NOT NULL</span></div>
+            <div class="db-attribute-row"><span>email</span><span>VARCHAR(120)</span><span>UNIQUE</span></div>
+            <div class="db-attribute-row"><span>password_hash</span><span>VARCHAR(255)</span><span>NOT NULL</span></div>
+            <div class="db-attribute-row"><span>avatar</span><span>VARCHAR(10)</span><span>DEFAULT</span></div>
+            <div class="db-attribute-row"><span>bio</span><span>TEXT</span><span>NULL</span></div>
+            <div class="db-attribute-row"><span>enrolled_date</span><span>DATE</span><span>NOT NULL</span></div>
+            <div class="db-attribute-row"><span>status</span><span>VARCHAR(20)</span><span>DEFAULT</span></div>
+          </div>
+
+          <!-- Entity 2: Admins -->
+          <div class="db-entity-card">
+            <div class="db-entity-header">
+              <span>TABLE: admins</span>
+              <span>ENTITY</span>
+            </div>
+            <div class="db-attribute-row"><span class="db-key-pk">🔑 admin_id</span><span>VARCHAR(36)</span><span>PK</span></div>
+            <div class="db-attribute-row"><span>full_name</span><span>VARCHAR(100)</span><span>NOT NULL</span></div>
+            <div class="db-attribute-row"><span>email</span><span>VARCHAR(120)</span><span>UNIQUE</span></div>
+            <div class="db-attribute-row"><span>password_hash</span><span>VARCHAR(255)</span><span>NOT NULL</span></div>
+            <div class="db-attribute-row"><span>role</span><span>VARCHAR(50)</span><span>DEFAULT</span></div>
+            <div class="db-attribute-row"><span>department</span><span>VARCHAR(80)</span><span>NOT NULL</span></div>
+          </div>
+
+          <!-- Entity 3: Courses -->
+          <div class="db-entity-card">
+            <div class="db-entity-header">
+              <span>TABLE: courses</span>
+              <span>ENTITY</span>
+            </div>
+            <div class="db-attribute-row"><span class="db-key-pk">🔑 course_id</span><span>VARCHAR(36)</span><span>PK</span></div>
+            <div class="db-attribute-row"><span>title</span><span>VARCHAR(150)</span><span>NOT NULL</span></div>
+            <div class="db-attribute-row"><span>instructor</span><span>VARCHAR(100)</span><span>NOT NULL</span></div>
+            <div class="db-attribute-row"><span>category</span><span>VARCHAR(50)</span><span>NOT NULL</span></div>
+            <div class="db-attribute-row"><span>difficulty_level</span><span>ENUM(...)</span><span>NOT NULL</span></div>
+            <div class="db-attribute-row"><span>duration_hours</span><span>VARCHAR(30)</span><span>NOT NULL</span></div>
+            <div class="db-attribute-row"><span>price</span><span>VARCHAR(20)</span><span>DEFAULT</span></div>
+            <div class="db-attribute-row"><span>description</span><span>TEXT</span><span>NOT NULL</span></div>
+          </div>
+
+          <!-- Entity 4: Enrollments (Junction Table M:N) -->
+          <div class="db-entity-card" style="border: 2px solid var(--color-accent);">
+            <div class="db-entity-header" style="background-color: var(--color-accent);">
+              <span>TABLE: enrollments</span>
+              <span>JUNCTION M:N</span>
+            </div>
+            <div class="db-attribute-row"><span class="db-key-pk">🔑 enrollment_id</span><span>VARCHAR(36)</span><span>PK</span></div>
+            <div class="db-attribute-row"><span class="db-key-fk">🔗 student_id</span><span>VARCHAR(36)</span><span>FK(students)</span></div>
+            <div class="db-attribute-row"><span class="db-key-fk">🔗 course_id</span><span>VARCHAR(36)</span><span>FK(courses)</span></div>
+            <div class="db-attribute-row"><span>enrolled_at</span><span>DATETIME</span><span>DEFAULT</span></div>
+            <div class="db-attribute-row"><span>progress_percent</span><span>INT</span><span>DEFAULT 0</span></div>
+            <div class="db-attribute-row"><span>status</span><span>ENUM(...)</span><span>NOT NULL</span></div>
+          </div>
+
+          <!-- Entity 5: Lessons -->
+          <div class="db-entity-card">
+            <div class="db-entity-header">
+              <span>TABLE: lessons</span>
+              <span>ENTITY</span>
+            </div>
+            <div class="db-attribute-row"><span class="db-key-pk">🔑 lesson_id</span><span>VARCHAR(36)</span><span>PK</span></div>
+            <div class="db-attribute-row"><span class="db-key-fk">🔗 course_id</span><span>VARCHAR(36)</span><span>FK(courses)</span></div>
+            <div class="db-attribute-row"><span>module_name</span><span>VARCHAR(100)</span><span>NOT NULL</span></div>
+            <div class="db-attribute-row"><span>title</span><span>VARCHAR(150)</span><span>NOT NULL</span></div>
+            <div class="db-attribute-row"><span>duration</span><span>VARCHAR(30)</span><span>NOT NULL</span></div>
+            <div class="db-attribute-row"><span>video_url</span><span>VARCHAR(255)</span><span>NULL</span></div>
+            <div class="db-attribute-row"><span>content_text</span><span>TEXT</span><span>NOT NULL</span></div>
+          </div>
+
+          <!-- Entity 6: Lesson_Progress -->
+          <div class="db-entity-card">
+            <div class="db-entity-header">
+              <span>TABLE: lesson_progress</span>
+              <span>RELATION</span>
+            </div>
+            <div class="db-attribute-row"><span class="db-key-pk">🔑 progress_id</span><span>VARCHAR(36)</span><span>PK</span></div>
+            <div class="db-attribute-row"><span class="db-key-fk">🔗 student_id</span><span>VARCHAR(36)</span><span>FK(students)</span></div>
+            <div class="db-attribute-row"><span class="db-key-fk">🔗 lesson_id</span><span>VARCHAR(36)</span><span>FK(lessons)</span></div>
+            <div class="db-attribute-row"><span>is_completed</span><span>BOOLEAN</span><span>DEFAULT 0</span></div>
+            <div class="db-attribute-row"><span>notes</span><span>TEXT</span><span>NULL</span></div>
+            <div class="db-attribute-row"><span>updated_at</span><span>DATETIME</span><span>DEFAULT</span></div>
+          </div>
+
+          <!-- Entity 7: Quizzes -->
+          <div class="db-entity-card">
+            <div class="db-entity-header">
+              <span>TABLE: quizzes</span>
+              <span>ENTITY</span>
+            </div>
+            <div class="db-attribute-row"><span class="db-key-pk">🔑 quiz_id</span><span>VARCHAR(36)</span><span>PK</span></div>
+            <div class="db-attribute-row"><span class="db-key-fk">🔗 course_id</span><span>VARCHAR(36)</span><span>FK(courses)</span></div>
+            <div class="db-attribute-row"><span>title</span><span>VARCHAR(150)</span><span>NOT NULL</span></div>
+            <div class="db-attribute-row"><span>passing_score</span><span>INT</span><span>DEFAULT 70</span></div>
+          </div>
+
+          <!-- Entity 8: Questions -->
+          <div class="db-entity-card">
+            <div class="db-entity-header">
+              <span>TABLE: questions</span>
+              <span>ENTITY</span>
+            </div>
+            <div class="db-attribute-row"><span class="db-key-pk">🔑 question_id</span><span>VARCHAR(36)</span><span>PK</span></div>
+            <div class="db-attribute-row"><span class="db-key-fk">🔗 quiz_id</span><span>VARCHAR(36)</span><span>FK(quizzes)</span></div>
+            <div class="db-attribute-row"><span>question_text</span><span>TEXT</span><span>NOT NULL</span></div>
+            <div class="db-attribute-row"><span>correct_index</span><span>INT</span><span>NOT NULL</span></div>
+            <div class="db-attribute-row"><span>explanation</span><span>TEXT</span><span>NOT NULL</span></div>
+          </div>
+
+          <!-- Entity 9: Quiz_Attempts -->
+          <div class="db-entity-card">
+            <div class="db-entity-header">
+              <span>TABLE: quiz_attempts</span>
+              <span>RELATION</span>
+            </div>
+            <div class="db-attribute-row"><span class="db-key-pk">🔑 attempt_id</span><span>VARCHAR(36)</span><span>PK</span></div>
+            <div class="db-attribute-row"><span class="db-key-fk">🔗 student_id</span><span>VARCHAR(36)</span><span>FK(students)</span></div>
+            <div class="db-attribute-row"><span class="db-key-fk">🔗 quiz_id</span><span>VARCHAR(36)</span><span>FK(quizzes)</span></div>
+            <div class="db-attribute-row"><span>score_percentage</span><span>INT</span><span>NOT NULL</span></div>
+            <div class="db-attribute-row"><span>passed</span><span>BOOLEAN</span><span>NOT NULL</span></div>
+            <div class="db-attribute-row"><span>completed_at</span><span>DATETIME</span><span>DEFAULT</span></div>
+          </div>
+
+          <!-- Entity 10: Certificates -->
+          <div class="db-entity-card">
+            <div class="db-entity-header">
+              <span>TABLE: certificates</span>
+              <span>ENTITY</span>
+            </div>
+            <div class="db-attribute-row"><span class="db-key-pk">🔑 certificate_id</span><span>VARCHAR(36)</span><span>PK</span></div>
+            <div class="db-attribute-row"><span class="db-key-fk">🔗 student_id</span><span>VARCHAR(36)</span><span>FK(students)</span></div>
+            <div class="db-attribute-row"><span class="db-key-fk">🔗 course_id</span><span>VARCHAR(36)</span><span>FK(courses)</span></div>
+            <div class="db-attribute-row"><span>issued_date</span><span>DATE</span><span>NOT NULL</span></div>
+            <div class="db-attribute-row"><span>grade</span><span>VARCHAR(50)</span><span>NOT NULL</span></div>
+          </div>
+        </div>
+
+        <!-- Sample SQL DDL Code Preview Section -->
+        <div class="panel" style="margin-top: 3rem;">
+          <div class="panel-header">
+            <div>
+              <h3 style="font-size: 1.25rem; font-weight: 700;">Sample Production MySQL Schema (DDL)</h3>
+              <p style="font-size: 0.8125rem; color: var(--color-text-muted);">
+                Complete scripts are available in <code>database.sql</code> with constraints and foreign key triggers.
+              </p>
+            </div>
+            <a href="database.sql" download class="btn btn-sm btn-primary">Download database.sql</a>
+          </div>
+
+          <pre class="code-preview-block">
+<code>-- =======================================================================
+-- LearnSphere DBMS - Production MySQL Relational Table Definitions
+-- 3rd Normal Form (3NF) Architecture with Referential Integrity Constraints
+-- =======================================================================
+
+CREATE DATABASE IF NOT EXISTS learnsphere_db
+CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+USE learnsphere_db;
+
+-- 1. Students Entity
+CREATE TABLE IF NOT EXISTS students (
+    student_id VARCHAR(36) PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    email VARCHAR(120) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    avatar VARCHAR(10) DEFAULT 'ST',
+    bio TEXT,
+    enrolled_date DATE NOT NULL,
+    status ENUM('active', 'suspended', 'graduated') DEFAULT 'active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+-- 2. Courses Entity
+CREATE TABLE IF NOT EXISTS courses (
+    course_id VARCHAR(36) PRIMARY KEY,
+    title VARCHAR(150) NOT NULL,
+    instructor VARCHAR(100) NOT NULL,
+    category VARCHAR(50) NOT NULL,
+    difficulty_level ENUM('Beginner', 'Intermediate', 'Advanced') NOT NULL,
+    duration_hours VARCHAR(30) NOT NULL,
+    price VARCHAR(20) DEFAULT 'Free',
+    description TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+-- 3. Enrollments Associative Junction Table (Resolves M:N Cardinality)
+CREATE TABLE IF NOT EXISTS enrollments (
+    enrollment_id VARCHAR(36) PRIMARY KEY,
+    student_id VARCHAR(36) NOT NULL,
+    course_id VARCHAR(36) NOT NULL,
+    enrolled_at DATE NOT NULL,
+    status ENUM('in-progress', 'completed', 'dropped') DEFAULT 'in-progress',
+    progress_percent INT DEFAULT 0 CHECK (progress_percent BETWEEN 0 AND 100),
+    CONSTRAINT fk_enrollment_student 
+        FOREIGN KEY (student_id) REFERENCES students(student_id) 
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_enrollment_course 
+        FOREIGN KEY (course_id) REFERENCES courses(course_id) 
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT uq_student_course UNIQUE (student_id, course_id)
+) ENGINE=InnoDB;
+
+-- 4. Lessons Entity (1:N with Courses)
+CREATE TABLE IF NOT EXISTS lessons (
+    lesson_id VARCHAR(36) PRIMARY KEY,
+    course_id VARCHAR(36) NOT NULL,
+    module_name VARCHAR(100) NOT NULL,
+    title VARCHAR(150) NOT NULL,
+    duration VARCHAR(30) NOT NULL,
+    video_url VARCHAR(255),
+    content_text LONGTEXT NOT NULL,
+    sequence_order INT NOT NULL DEFAULT 1,
+    CONSTRAINT fk_lesson_course 
+        FOREIGN KEY (course_id) REFERENCES courses(course_id) 
+        ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB;</code>
+          </pre>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container footer-bottom">
+        <div>&copy; 2026 LearnSphere LMS Project. College DBMS Demonstration.</div>
+        <div>Complies with standard Third Normal Form (3NF) relational decomposition rules.</div>
+      </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+  </body>
+</html>

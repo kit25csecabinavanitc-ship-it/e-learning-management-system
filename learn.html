@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Learning Portal - LearnSphere LMS</title>
+    <meta name="description" content="Engage in structured video lessons, reading materials, self-paced progress tracking, and student notes." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- Top Bar Navigation Contract -->
+    <header class="site-header">
+      <div class="container header-container">
+        <a href="index.html" class="brand">
+          <div class="brand-icon">L</div>
+          <span class="brand-text">Learn<span>Sphere</span></span>
+        </a>
+
+        <nav class="nav-menu">
+          <a href="courses.html" class="nav-link">Courses</a>
+          <a href="dashboard.html" class="nav-link">Student Portal</a>
+          <a href="admin.html" class="nav-link">Admin Console</a>
+          <a href="database-design.html" class="nav-link">Database Schema</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="theme-toggle-btn" aria-label="Toggle Color Theme"></button>
+          <div id="nav-auth-container"></div>
+          <button class="mobile-nav-toggle" aria-label="Open mobile menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-drawer">
+        <a href="courses.html" class="mobile-nav-link">Courses Catalog</a>
+        <a href="dashboard.html" class="mobile-nav-link">Student Dashboard</a>
+        <a href="database-design.html" class="mobile-nav-link">Database Schema</a>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- Course Title & Progress Bar Header -->
+      <div style="padding: 1.5rem 0 1rem; border-bottom: 1px solid var(--color-border); display: flex; flex-direction: column; gap: 0.75rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <span id="stage-course-category" class="section-kicker">Database</span>
+            <h1 id="stage-course-title" style="font-size: 1.5rem; font-weight: 700; color: var(--color-text-main);">
+              Database Management Systems
+            </h1>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <a href="quiz.html" class="btn btn-sm btn-secondary">Take Course Quiz</a>
+            <a href="dashboard.html" class="btn btn-sm btn-secondary">Dashboard</a>
+          </div>
+        </div>
+
+        <div class="progress-container">
+          <div style="display: flex; justify-content: space-between; font-size: 0.8125rem; color: var(--color-text-muted);">
+            <span>Overall Course Progress</span>
+            <span id="course-progress-text" class="tabular-nums font-semibold">0% Completed</span>
+          </div>
+          <div class="progress-bar-track">
+            <div id="course-progress-bar" class="progress-bar-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Two-Zone Learning Layout -->
+      <div class="learning-layout">
+        <!-- Zone 1: Main Lecture Stage & Content -->
+        <section class="stage-player-card">
+          <!-- Video or Fallback Area -->
+          <div class="stage-video-wrap" id="video-stage-container">
+            <!-- Rendered by js/learning.js -->
+          </div>
+
+          <!-- Lesson Content -->
+          <div class="stage-content-body">
+            <div>
+              <div class="course-meta-inline" style="margin-bottom: 0.375rem;">
+                <span id="lesson-module-tag">Module 1</span>
+                <span aria-hidden="true">·</span>
+                <span id="lesson-duration-tag" class="tabular-nums">25 mins</span>
+              </div>
+              <h2 id="lesson-title" class="stage-lesson-title">Lesson Title</h2>
+            </div>
+
+            <!-- Learning Objectives Box -->
+            <div style="background-color: var(--color-surface-hover); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 1.25rem;">
+              <h4 style="font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-accent); margin-bottom: 0.5rem;">
+                Core Learning Objectives
+              </h4>
+              <ul id="lesson-objectives-list" style="list-style: none;">
+                <!-- Populated dynamically -->
+              </ul>
+            </div>
+
+            <!-- Reading Material & Text Area -->
+            <div>
+              <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">Lesson Notes &amp; Concept Theory</h4>
+              <p id="lesson-text-content" class="stage-lesson-desc">
+                Lesson content loading...
+              </p>
+            </div>
+
+            <!-- Interactive Student Notes Pad -->
+            <div class="notes-pad">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <label for="student-notes-area" style="font-size: 0.875rem; font-weight: 700; color: var(--color-text-main);">
+                  📝 My Personal Study Notes for This Lesson
+                </label>
+                <span id="notes-save-indicator" style="font-size: 0.75rem; color: var(--color-text-subtle);">
+                  Autosaves to browser localStorage
+                </span>
+              </div>
+              <textarea 
+                id="student-notes-area" 
+                placeholder="Type your notes, key SQL queries, normalization rules, or review thoughts here..."
+              ></textarea>
+            </div>
+
+            <!-- Navigation Controls & Completion -->
+            <div class="stage-actions-bar">
+              <button id="prev-lesson-btn" class="btn btn-secondary">
+                ← Previous Lesson
+              </button>
+
+              <button id="mark-complete-btn" class="btn btn-primary">
+                Mark Lesson as Completed
+              </button>
+
+              <button id="next-lesson-btn" class="btn btn-secondary">
+                Next Lesson →
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Zone 2: Syllabus Accordion Panel -->
+        <aside class="syllabus-panel">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border); padding-bottom: 0.75rem;">
+            <h3 style="font-size: 1.1rem; font-weight: 700;">Course Syllabus</h3>
+            <span style="font-size: 0.75rem; color: var(--color-text-muted);">Syllabus Modules</span>
+          </div>
+
+          <div id="syllabus-list-container">
+            <!-- Populated dynamically by js/learning.js -->
+          </div>
+
+          <div style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--color-border);">
+            <div style="font-size: 0.8125rem; color: var(--color-text-muted); margin-bottom: 0.5rem;">
+              Ready to verify your knowledge?
+            </div>
+            <a href="quiz.html" class="btn btn-primary btn-block">Take Assessment Quiz</a>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container footer-bottom">
+        <div>&copy; 2026 LearnSphere LMS Project. College DBMS Demonstration.</div>
+        <div>Progress is saved in real time to the relational <code>lesson_progress</code> and <code>enrollments</code> tables.</div>
+      </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/learning.js"></script>
+  </body>
+</html>

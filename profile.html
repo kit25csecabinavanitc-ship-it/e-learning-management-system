@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Profile &amp; Achievements - LearnSphere LMS</title>
+    <meta name="description" content="View your academic credentials, enrolled courses, and earned graduation certificates on LearnSphere." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- Top Bar Navigation Contract -->
+    <header class="site-header">
+      <div class="container header-container">
+        <a href="index.html" class="brand">
+          <div class="brand-icon">L</div>
+          <span class="brand-text">Learn<span>Sphere</span></span>
+        </a>
+
+        <nav class="nav-menu">
+          <a href="courses.html" class="nav-link">Courses</a>
+          <a href="dashboard.html" class="nav-link">Student Portal</a>
+          <a href="admin.html" class="nav-link">Admin Console</a>
+          <a href="database-design.html" class="nav-link">Database Schema</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="theme-toggle-btn" aria-label="Toggle Color Theme"></button>
+          <div id="nav-auth-container"></div>
+          <button class="mobile-nav-toggle" aria-label="Open mobile menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-drawer">
+        <a href="courses.html" class="mobile-nav-link">Courses Catalog</a>
+        <a href="dashboard.html" class="mobile-nav-link">Student Dashboard</a>
+        <a href="admin.html" class="mobile-nav-link">Admin Console</a>
+        <a href="database-design.html" class="mobile-nav-link">Database Schema</a>
+      </div>
+    </header>
+
+    <main class="section">
+      <div class="container" style="max-width: 1000px;">
+        <!-- Profile Header Card -->
+        <div class="panel" style="margin-bottom: 2rem;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1.5rem;">
+            <div style="display: flex; align-items: center; gap: 1.5rem;">
+              <div class="sidebar-avatar" id="profile-avatar" style="width: 4.5rem; height: 4.5rem; font-size: 1.75rem;">
+                AJ
+              </div>
+              <div>
+                <h1 id="profile-name" style="font-size: 1.75rem; font-weight: 700; color: var(--color-text-main);">
+                  Alex Johnson
+                </h1>
+                <p id="profile-email" style="font-size: 0.9375rem; color: var(--color-text-muted);">
+                  student@learnsphere.edu
+                </p>
+                <div class="course-meta-inline" style="margin-top: 0.375rem;">
+                  <span id="profile-role">Student</span>
+                  <span aria-hidden="true">·</span>
+                  <span>Enrolled since <span id="profile-enrolled-date" class="tabular-nums">2026-01-15</span></span>
+                </div>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 0.75rem;">
+              <button id="open-edit-profile-btn" class="btn btn-secondary">Edit Profile</button>
+              <button id="profile-logout-btn" class="btn btn-secondary">Sign Out</button>
+            </div>
+          </div>
+
+          <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--color-border);">
+            <h4 style="font-size: 0.875rem; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.375rem;">
+              Academic Biography
+            </h4>
+            <p id="profile-bio" style="font-size: 0.9375rem; color: var(--color-text-main); line-height: 1.6;">
+              Computer Science undergraduate passionate about full-stack web development and database architecture.
+            </p>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2rem;">
+          <!-- Earned Certificates (Relational certificates Entity) -->
+          <div>
+            <div class="panel">
+              <div class="panel-header">
+                <h3 style="font-size: 1.2rem; font-weight: 700;">Earned Academic Certificates</h3>
+                <span style="font-size: 0.75rem; color: var(--color-accent); font-weight: 600;">Verified Credentials</span>
+              </div>
+              <div id="certificates-container" style="display: flex; flex-direction: column; gap: 1rem;">
+                <!-- Populated dynamically by js/profile.js -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Enrolled Courses Summary -->
+          <div>
+            <div class="panel">
+              <div class="panel-header">
+                <h3 style="font-size: 1.2rem; font-weight: 700;">Current Course Enrollments</h3>
+                <a href="courses.html" style="font-size: 0.8125rem; color: var(--color-accent);">Catalog →</a>
+              </div>
+              <div id="profile-enrolled-summary">
+                <!-- Populated dynamically by js/profile.js -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Edit Profile Modal Dialog -->
+    <div class="modal-overlay" id="edit-profile-modal">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h3 style="font-size: 1.15rem; font-weight: 700;">Edit Student Profile</h3>
+          <button id="close-edit-modal-btn" class="btn btn-sm btn-secondary" style="border: none; font-size: 1.2rem; cursor: pointer;">&times;</button>
+        </div>
+        <form id="edit-profile-form">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="edit-name" class="form-label">Full Name</label>
+              <input type="text" id="edit-name" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+              <label for="edit-email" class="form-label">Email Address</label>
+              <input type="email" id="edit-email" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+              <label for="edit-bio" class="form-label">Academic Bio / Focus Areas</label>
+              <textarea id="edit-bio" class="form-control" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="document.getElementById('edit-profile-modal').classList.remove('active')">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Official Certificate Modal Dialog -->
+    <div class="modal-overlay" id="cert-modal-overlay">
+      <div class="modal-box" style="max-width: 650px;">
+        <div class="modal-header">
+          <h3 style="font-size: 1.1rem; font-weight: 700;">Official Certificate of Achievement</h3>
+          <button id="cert-modal-close" class="btn btn-sm btn-secondary" style="border: none; font-size: 1.2rem; cursor: pointer;">&times;</button>
+        </div>
+        <div class="modal-body" id="cert-modal-canvas" style="padding: 1.5rem;">
+          <!-- Dynamically generated certificate canvas -->
+        </div>
+        <div class="modal-footer">
+          <button id="cert-modal-print" class="btn btn-primary">🖨️ Print / Save PDF</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container footer-bottom">
+        <div>&copy; 2026 LearnSphere LMS Project. College DBMS Demonstration.</div>
+        <div>All profile modifications update the <code>students</code> table in localStorage.</div>
+      </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/profile.js"></script>
+  </body>
+</html>
